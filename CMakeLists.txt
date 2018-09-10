@@ -2,6 +2,10 @@ cmake_minimum_required (VERSION 3.7)
 project (fennec)
 enable_testing()
 
+if(UNIX AND NOT APPLE)
+        set(LINUX TRUE)
+endif()
+
 set (FENNEC_INCLUDE_DIRECTORIES "${CMAKE_CURRENT_SOURCE_DIR}/include")
 include_directories(${FENNEC_INCLUDE_DIRECTORIES})
 
