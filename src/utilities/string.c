@@ -213,9 +213,9 @@ string string_replace(string const *s, string const *search,
   int32_t replace_point = string_find_first(s, search, 0);
   int32_t s_i = 0;
 
-  for (int32_t i = 0; i < result.length;) {
+  for (uint32_t i = 0; i < result.length;) {
     if (replace_point == s_i) {
-      for (int32_t j = 0; j < replace_with->length; ++j) {
+      for (uint32_t j = 0; j < replace_with->length; ++j) {
         result.data[i + j] = replace_with->data[j];
       }
       replace_point =

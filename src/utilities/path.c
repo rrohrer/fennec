@@ -25,7 +25,7 @@ char path_get_system_slash() { return '/'; }
 string path_join(string const *first, string const *second) {
   string slashes = string_wrap_cstring("/\\");
   bool ends_with_slash = string_find_last_any(first, &slashes, first->length) ==
-                         (first->length - 1);
+                         (int32_t)(first->length - 1);
   bool starts_with_slash = string_find_first_any(second, &slashes, 0) == 0;
 
   if (ends_with_slash && starts_with_slash) {
