@@ -30,17 +30,19 @@ build/lib/libfennec.a: $(FENNEC_OBJ) build/lib
 	ar rcs $@ $(FENNEC_OBJ)
 
 build/obj/%.o: %.c | build/obj $(FENNEC_DEP_FILES)
-	clang $(CFLAGS) $(FENNEC_INCLUDES) -I$(dir $<) -c $< -o $@
+	@echo $@
+	@clang $(CFLAGS) $(FENNEC_INCLUDES) -I$(dir $<) -c $< -o $@
 
 build/obj/%.d: %.c
 	@mkdir -p $(dir $@)
 	@clang $(CFLAGS) $< -MM -MT $(@:.d=.o) > $@
 
 test: $(FENNEC_TEST_BINS) $(FENNEC_TEST_SRCS)
-	for t in $(FENNEC_TEST_BINS); do ./$$t; done
+	@for t in $(FENNEC_TEST_BINS); do ./$$t; done
 
 build/bin/tests/%: tests/%.c build/lib/libfennec.a build/bin/tests
-	clang $(CFLAGS) $(FENNEC_INCLUDES) $< -Lbuild/lib -lfennec -o $@
+	@echo $@
+	@clang $(CFLAGS) $(FENNEC_INCLUDES) $< -Lbuild/lib -lfennec -o $@
 
 clean:
 	@rm -rf build
